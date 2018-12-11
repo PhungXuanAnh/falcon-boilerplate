@@ -7,7 +7,7 @@ from app import config
 
 
 logging.basicConfig(level=config.LOG_LEVEL)
-LOG = logging.getLogger('API')
+LOG = logging.getLogger('app')
 LOG.propagate = False
 
 INFO_FORMAT = '[%(asctime)s] [%(process)d] [%(levelname)s] %(message)s'
