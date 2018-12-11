@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export APP_ENV="live"
+export APP_ENV="dev"
 
 function start () {
     source .venv/python3/bin/activate
