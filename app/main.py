@@ -4,7 +4,7 @@ import falcon
 
 from app import log
 from app.middleware import AuthHandler, JSONTranslator, DatabaseSessionManager
-from app.database import db_session, init_session
+from app.utils.database import db_session, init_session
 
 from app.api.common import base
 from app.api.v1 import users

@@ -11,7 +11,7 @@ except ImportError:
 from app import log
 from app.utils.alchemy import new_alchemy_encoder
 from app.config import BRAND_NAME, POSTGRES
-from app.database import engine
+from app.utils.database import engine
 from app.errors import NotSupportedError
 
 LOG = log.get_logger()
