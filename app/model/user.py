@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 
 from app.model import Base
 from app.config import UUID_LEN
-from app.utils import alchemy
+from app.utils import database
 
 
 class User(Base):
@@ -35,7 +35,7 @@ class User(Base):
     FIELDS = {
         'username': str,
         'email': str,
-        'info': alchemy.passby,
+        'info': database.passby,
         'token': str
     }
 
