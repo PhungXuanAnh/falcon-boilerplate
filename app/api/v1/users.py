@@ -6,14 +6,14 @@ import falcon
 from sqlalchemy.orm.exc import NoResultFound
 from cerberus import Validator, ValidationError
 
-from app import log
+import logging
 from app.api.common import BaseResource
 from app.utils.hooks import auth_required
 from app.utils.auth import encrypt_token, hash_password, verify_password, uuid
 from app.model import User
 from app.errors import AppError, InvalidParameterError, UserNotExistsError, PasswordNotMatch
 
-LOG = log.get_logger()
+LOG = logging.getLogger('app')
 
 
 FIELDS = {

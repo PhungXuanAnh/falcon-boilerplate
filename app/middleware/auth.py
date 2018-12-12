@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from app import log
+import logging
 from app.utils.auth import decrypt_token
 from app.errors import UnauthorizedError
 
 
-LOG = log.get_logger()
+LOG = logging.getLogger('app')
 
 
 class AuthHandler(object):

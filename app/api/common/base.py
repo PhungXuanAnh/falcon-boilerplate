@@ -8,13 +8,13 @@ try:
 except ImportError:
     OrderedDict = dict
 
-from app import log
+import logging
 from app.utils.database import new_alchemy_encoder
 from app.config import BRAND_NAME, POSTGRES
 from app.utils.database import engine
 from app.errors import NotSupportedError
 
-LOG = log.get_logger()
+LOG = logging.getLogger('app')
 
 
 class BaseResource(object):

@@ -4,10 +4,10 @@ from sqlalchemy import Column
 from sqlalchemy import DateTime, func
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 
-from app import log
+import logging
 from app.utils import database
 
-LOG = log.get_logger()
+LOG = logging.getLogger('app')
 
 
 class BaseModel(object):

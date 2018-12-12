@@ -1,34 +1,27 @@
 # -*- coding: utf-8 -*-
 
-import falcon
+import logging
+from app import config
 
-from app import log
-from app.middleware import AuthHandler, JSONTranslator, DatabaseSessionManager
-from app.utils.database import db_session, init_session
-
-from app.api.common import base
-from app.api.v1 import users
-from app.errors import AppError
-
-LOG = log.get_logger()
+logging.config.dictConfig(config.LOGGING)
+LOG = logging.getLogger('app')
 
 
-class App(falcon.API):
-    def __init__(self, *args, **kwargs):
-        super(App, self).__init__(*args, **kwargs)
-        LOG.info('API Server is starting')
+def init():
+    from app.api import API
+    from app.utils.database import db_session, init_session
+    from app.middleware import AuthHandler, JSONTranslator, DatabaseSessionManager
 
-        self.add_route('/', base.BaseResource())
-        self.add_route('/v1/users', users.Collection())
-        self.add_route('/v1/users/{user_id}', users.Item())
-        self.add_route('/v1/users/self/login', users.Self())
+    init_session()
+    middleware = [AuthHandler(), JSONTranslator(), DatabaseSessionManager(db_session)]
+    application = API(middleware=middleware)
 
-        self.add_error_handler(AppError, AppError.handle)
+    LOG.info('API Server is starting')
 
-init_session()
-middleware = [AuthHandler(), JSONTranslator(), DatabaseSessionManager(db_session)]
-application = App(middleware=middleware)
+    return application
 
+
+application = init()
 
 if __name__ == "__main__":
     from wsgiref import simple_server

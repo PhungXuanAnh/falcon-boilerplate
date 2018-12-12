@@ -8,10 +8,10 @@ import json
 import time
 import datetime
 
-from app import log
+import logging
 from app import config
 
-LOG = log.get_logger()
+LOG = logging.getLogger('app')
 
 
 def get_engine(uri):
