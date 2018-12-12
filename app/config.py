@@ -2,7 +2,6 @@
 
 import os
 import configparser
-from itertools import chain
 
 
 BRAND_NAME = 'Falcon REST API Template'
@@ -12,26 +11,21 @@ UUID_LEN = 10
 UUID_ALPHABET = ''.join(map(chr, range(48, 58)))
 TOKEN_EXPIRES = 3600
 
-APP_ENV = os.environ.get('APP_ENV') or 'local'  # or 'live' to load live
-INI_FILE = os.path.join(
-        os.path.dirname(os.path.realpath(__file__)),
-        '../conf/{}.ini'.format(APP_ENV))
-
+# ==================== READ CONFIG FILE ===================================
+APP_ENV = os.environ.get('APP_ENV')
+INI_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        '../conf/{}.ini'.format(APP_ENV))
 CONFIG = configparser.ConfigParser()
 CONFIG.read(INI_FILE)
-POSTGRES = CONFIG['postgres']
-if APP_ENV == 'dev' or APP_ENV == 'live':
-    DB_CONFIG = (POSTGRES['user'], POSTGRES['password'], POSTGRES['host'], POSTGRES['database'])
-    DATABASE_URL = "postgresql+psycopg2://%s:%s@%s/%s" % DB_CONFIG
-else:
-    DB_CONFIG = (POSTGRES['host'], POSTGRES['database'])
-    DATABASE_URL = "postgresql+psycopg2://%s/%s" % DB_CONFIG
 
+# ==================== DATABASE ===========================================
+POSTGRES = CONFIG['postgres']
+DB_CONFIG = (POSTGRES['user'], POSTGRES['password'], POSTGRES['host'], POSTGRES['database'])
+DATABASE_URL = "postgresql+psycopg2://%s:%s@%s/%s" % DB_CONFIG
 DB_ECHO = True if CONFIG['database']['echo'] == 'yes' else False
 DB_AUTOCOMMIT = True
 
-
-# ==================== LOGGING =============================================
+# ==================== LOGGING ============================================
 LOG_LEVEL = CONFIG['logging']['level']
 LOGGING_SLACK_API_KEY = ""
 LOGGING_SLACK_CHANNEL = "#general"
@@ -58,7 +52,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'filename': LOG_DIR + '/app.DEBUG.log',
-            'maxBytes': 1 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
+            'maxBytes': 5 * 1024 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
             'backupCount': 3,
         },
         'app.INFO': {
@@ -66,7 +60,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'filename': LOG_DIR + '/app.INFO.log',
-            'maxBytes': 1 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
+            'maxBytes': 5 * 1024 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
             'backupCount': 3,
         },
         'app.ERROR': {
@@ -74,7 +68,7 @@ LOGGING = {
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
             'filename': LOG_DIR + '/app.ERROR.log',
-            'maxBytes': 1 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
+            'maxBytes': 5 * 1024 * 1024,  # 1Kb       #100 * 1024 * 1024,  # 100Mb
             'backupCount': 3,
         },
         'slack.ERROR': {
@@ -86,7 +80,7 @@ LOGGING = {
     },
     'loggers': {
         'app': {
-            'handlers': ['console', 'app.DEBUG', 'app.INFO', 'app.ERROR', 'slack.ERROR'],
+            'handlers': ['app.INFO', 'slack.ERROR'] if LOG_LEVEL == 'INFO' else ['console', 'app.DEBUG', 'app.INFO', 'app.ERROR', 'slack.ERROR'],
             'propagate': False,
             'level': 'INFO',
         },
