@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import falcon
-from app.errors import UnauthorizedError
+from app.utils.errors import UnauthorizedError
 from cerberus import Validator, ValidationError
-from app.errors import InvalidParameterError
+from app.utils.errors import InvalidParameterError
 
 
 FIELDS = {

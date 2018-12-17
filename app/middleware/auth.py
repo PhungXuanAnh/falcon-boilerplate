@@ -2,7 +2,7 @@
 
 import logging
 from app.utils.auth import decrypt_token
-from app.errors import UnauthorizedError
+from app.utils.errors import UnauthorizedError
 
 
 LOG = logging.getLogger('app')

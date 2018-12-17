@@ -3,7 +3,7 @@
 import json
 import falcon
 
-from app.errors import InvalidParameterError
+from app.utils.errors import InvalidParameterError
 
 
 class JSONTranslator(object):

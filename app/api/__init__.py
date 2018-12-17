@@ -6,7 +6,7 @@ from .common import BaseResource
 from .v1 import *
 from app.api.common import base
 from app.api.v1 import users
-from app.errors import AppError
+from app.utils.errors import AppError
 
 LOG = logging.getLogger('app')
 

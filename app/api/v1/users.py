@@ -10,7 +10,7 @@ from app.api.common import BaseResource
 from app.utils.hooks import auth_required, validate_user_create
 from app.utils.auth import encrypt_token, hash_password, verify_password, uuid
 from app.model import User
-from app.errors import AppError, InvalidParameterError, UserNotExistsError, PasswordNotMatch
+from app.utils.errors import AppError, InvalidParameterError, UserNotExistsError, PasswordNotMatch
 
 LOG = logging.getLogger('app')
 

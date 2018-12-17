@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 import logging
 from app import config
-from app.errors import DatabaseError, ERR_DATABASE_ROLLBACK
+from app.utils.errors import DatabaseError, ERR_DATABASE_ROLLBACK
 
 LOG = logging.getLogger('app')
 
