@@ -4,59 +4,15 @@ import re
 import falcon
 
 from sqlalchemy.orm.exc import NoResultFound
-from cerberus import Validator, ValidationError
 
 import logging
 from app.api.common import BaseResource
-from app.utils.hooks import auth_required
+from app.utils.hooks import auth_required, validate_user_create
 from app.utils.auth import encrypt_token, hash_password, verify_password, uuid
 from app.model import User
 from app.errors import AppError, InvalidParameterError, UserNotExistsError, PasswordNotMatch
 
 LOG = logging.getLogger('app')
-
-
-FIELDS = {
-    'username': {
-        'type': 'string',
-        'required': True,
-        'minlength': 4,
-        'maxlength': 20
-    },
-    'email': {
-        'type': 'string',
-        'regex': '[a-zA-Z0-9._-]+@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}',
-        'required': True,
-        'maxlength': 320
-    },
-    'password': {
-        'type': 'string',
-        'regex': '[0-9a-zA-Z]\w{3,14}',
-        'required': True,
-        'minlength': 8,
-        'maxlength': 64
-    },
-    'info': {
-        'type': 'dict',
-        'required': False
-    }
-}
-
-
-def validate_user_create(req, res, resource, params):
-    schema = {
-        'username': FIELDS['username'],
-        'email': FIELDS['email'],
-        'password': FIELDS['password'],
-        'info': FIELDS['info']
-    }
-
-    v = Validator(schema)
-    try:
-        if not v.validate(req.context['data']):
-            raise InvalidParameterError(v.errors)
-    except ValidationError:
-        raise InvalidParameterError('Invalid Request %s' % req.context)
 
 
 class Collection(BaseResource):
