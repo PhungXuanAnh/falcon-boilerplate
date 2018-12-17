@@ -55,7 +55,7 @@ curl -XPOST http://localhost:5000/v1/users -H "Content-Type: application/json" -
  "username": "test1",
  "email": "test1@gmail.com",
  "password": "test1234"
-}'
+}' | json_pp
 ```
 
 - Response
@@ -76,7 +76,7 @@ Log in with email and password
 curl -XGET http://localhost:5000/v1/users/self/login -H "Content-Type: application/json" -d '{
  "email": "test1@gmail.com",
  "password": "test1234"
-}'
+}' | json_pp
 ```
 
 - Response
@@ -105,7 +105,7 @@ curl -XPOST http://localhost:5000/v1/users -H "Content-Type: application/json" -
  "username": "t",
  "email": "test1@gmail.c",
  "password": "123"
-}'
+}' | json_pp
 ```
 
 - Response
@@ -134,7 +134,7 @@ curl -XPOST http://localhost:5000/v1/users -H "Content-Type: application/json" -
  "username": "test1",
  "email": "test1@gmail.com",
  "password": "test1234"
-}'
+}' | json_pp
 ```
 
 - Response
@@ -151,11 +151,36 @@ curl -XPOST http://localhost:5000/v1/users -H "Content-Type: application/json" -
 }
 ```
 
+Get a user with id 100 with auth token
+
+- Request
+```shell
+curl -XGET http://localhost:5000/v1/users/100 -H "Authorization: gAAAAABV6Cxtz2qbcgOOzcjjyoBXBxJbjxwY2cSPdJB4gta07ZQXUU5NQ2BWAFIxSZlnlCl7wAwLe0RtBECUuV96RX9iiU63BP7wI1RQW-G3a1zilI3FHss=" | json_pp
+```
+
+- Response
+```json
+{
+   "meta" : {
+      "code" : 200,
+      "message" : "OK"
+   },
+   "data" : {
+      "username" : "test1",
+      "created" : 1545004376,
+      "modified" : 1545004376,
+      "token" : "gAAAAABcF0fIzHchY58BLgagibww29EOvykt_onSEP_EplXRfbNDF8zDFMmYRaCi91vqyRNJngMp9qUQJ9txJmx8I1SmHZQDZg==",
+      "info" : null,
+      "email" : "test1@gmail.com"
+   }
+}
+```
+
 Get a collection of users with auth token
 
 - Request
 ```shell
-curl -XGET http://localhost:5000/v1/users/100 -H "Authorization: gAAAAABV6Cxtz2qbcgOOzcjjyoBXBxJbjxwY2cSPdJB4gta07ZQXUU5NQ2BWAFIxSZlnlCl7wAwLe0RtBECUuV96RX9iiU63BP7wI1RQW-G3a1zilI3FHss="
+curl -XGET http://localhost:5000/v1/users -H "Authorization: gAAAAABV6Cxtz2qbcgOOzcjjyoBXBxJbjxwY2cSPdJB4gta07ZQXUU5NQ2BWAFIxSZlnlCl7wAwLe0RtBECUuV96RX9iiU63BP7wI1RQW-G3a1zilI3FHss=" | json_pp
 ```
 
 - Response
