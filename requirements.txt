@@ -9,3 +9,4 @@ cryptography==2.4.1
 cerberus==0.9
 slacker_log_handler
 psycopg2-binary==2.7.6.1
+alembic
