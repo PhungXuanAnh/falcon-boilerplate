@@ -65,4 +65,3 @@ class BaseResource(object):
 
     def on_delete(self, req, res):
         raise NotSupportedError(method='DELETE', url=req.path)
-
