@@ -12,7 +12,7 @@ UUID_ALPHABET = ''.join(map(chr, range(48, 58)))
 TOKEN_EXPIRES = 3600
 
 # ==================== READ CONFIG FILE ===================================
-APP_ENV = os.environ.get('APP_ENV')
+APP_ENV = os.environ.get('APP_ENV', 'stag')
 INI_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         '../conf/{}.ini'.format(APP_ENV))
 CONFIG = configparser.ConfigParser()
