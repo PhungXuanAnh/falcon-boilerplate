@@ -13,8 +13,13 @@ TOKEN_EXPIRES = 3600
 
 # ==================== READ CONFIG FILE ===================================
 APP_ENV = os.environ.get('APP_ENV', 'stag')
-INI_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                        '../conf/{}.ini'.format(APP_ENV))
+if APP_ENV == "local":
+    INI_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                            '../../conf/{}.ini'.format(APP_ENV))
+else:                           
+    INI_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                            '../conf/{}.ini'.format(APP_ENV))
+
 CONFIG = configparser.ConfigParser()
 CONFIG.read(INI_FILE)
 
