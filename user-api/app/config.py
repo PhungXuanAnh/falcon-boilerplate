@@ -30,7 +30,6 @@ DB_AUTOCOMMIT = True
 # ==================== RABBITMQ ===========================================
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', '127.0.0.1')
 RABBITMQ_PORT = os.getenv('RABBITMQ_PORT', 5672)
-PUBLIC_EVENT_QUEUE = os.getenv('PUBLIC_EVENT_QUEUE', 'public_event')
 WORKER_QUEUE = os.getenv('WORKER_QUEUE', 'worker')
 
 # ==================== RABBITMQ ===========================================
