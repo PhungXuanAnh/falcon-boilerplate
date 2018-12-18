@@ -8,7 +8,7 @@ WORKDIR /build
 
 COPY . /build
 
-EXPOSE 8000
+EXPOSE 5000
 
 ENV C_FORCE_ROOT="true"
 CMD ["honcho", "start"]
