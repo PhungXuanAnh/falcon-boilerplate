@@ -27,6 +27,17 @@ DATABASE_URL = "postgresql+psycopg2://{user}:{password}@{host}/{database}".forma
 DB_ECHO = True if DATABASE_ECHO == 'yes' else False
 DB_AUTOCOMMIT = True
 
+# ==================== RABBITMQ ===========================================
+RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', '127.0.0.1')
+RABBITMQ_PORT = os.getenv('RABBITMQ_PORT', 5672)
+PUBLIC_EVENT_QUEUE = os.getenv('PUBLIC_EVENT_QUEUE', 'public_event')
+WORKER_QUEUE = os.getenv('WORKER_QUEUE', 'worker')
+
+# ==================== RABBITMQ ===========================================
+REDIS_HOST = os.getenv('REDIS_URL', '127.0.0.1')
+REDIS_PORT = os.getenv('REDIS_URL', 6379)
+REDIS_URL = "redis://{host}:{port}".format(host=REDIS_HOST, port=REDIS_PORT)
+
 # ==================== LOGGING ============================================
 LOG_LEVEL = os.getenv('LOGGING_LEVEL', 'DEBUG')
 # TODO: add slack api key below

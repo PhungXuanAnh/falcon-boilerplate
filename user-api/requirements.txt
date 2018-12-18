@@ -11,3 +11,7 @@ psycopg2-binary==2.7.6.1
 honcho==1.0.1
 alembic
 slacker_log_handler
+redis==2.10.6
+pika==0.11.2
+celery==4.1.0
+
