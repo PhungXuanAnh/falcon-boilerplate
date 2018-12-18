@@ -15,7 +15,8 @@ services:
         networks:
             - api-net
         ports:
-            - 8000:8000
+            - 5000:5000
+        env_file: env/stag.env
         volumes:
             - ./user-api/:/build/
         logging:
@@ -33,7 +34,7 @@ services:
         ports:
             - "0.0.0.0:80:80"
         volumes:
-            - ./nginx-config/:/etc/nginx/conf.d/
+            - ./nginx:/etc/nginx/conf.d:ro
         command: /bin/bash -c "nginx -g 'daemon off;'"
         hostname: nginx
         #restart: always
@@ -49,7 +50,7 @@ services:
       ports:
         - 5432:5432
       # restart: always
-    #   env_file: docker-env/postgres.env
+      env_file: env/stag.env
       volumes:
         - ./postgres-data:/var/lib/postgresql/data
       networks:

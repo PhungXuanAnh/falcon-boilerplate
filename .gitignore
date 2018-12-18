@@ -2,4 +2,4 @@
 __pycache__/
 user-api/log/*
 
-postgres-date/*
+postgres-data/*
