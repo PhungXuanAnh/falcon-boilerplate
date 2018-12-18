@@ -51,7 +51,7 @@ services:
         hostname: rabbitmq
         # restart: always
         networks:
-            - point-system-net
+            - api-net
         logging:
             driver: "json-file"
             options:
@@ -82,12 +82,12 @@ services:
         hostname: redis
         # restart: always
         networks:
-        - sender-back
+        - api-net
         logging:
-        driver: "json-file"
-        options:
-            max-size: "100M"
-            max-file: "3"
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"
                 
     nginx:
         image: nginx:1.11.6
