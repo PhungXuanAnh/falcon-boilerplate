@@ -1,0 +1,6 @@
+{
+    // "python.linting.pylintArgs": [
+    //     "--init-hook",
+    //     "import sys; sys.path.append('/home/xuananh/data/repo/falcon-rest-api/user-api/app')"
+    // ]
+}
