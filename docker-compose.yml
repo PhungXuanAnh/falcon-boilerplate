@@ -43,6 +43,21 @@ services:
                 max-size: "100M"
                 max-file: "3"
 
+    rabbitmq:
+        image: rabbitmq:3.7.7-management
+        ports:
+            - 15672:15672
+            - 5672:5672
+        hostname: rabbitmq
+        # restart: always
+        networks:
+            - point-system-net
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"                
+
     postgres:
         image: postgres:9.4
         hostname: postgres
@@ -59,6 +74,20 @@ services:
             options:
                 max-size: "100M"
                 max-file: "3"
+
+    redis:
+        image: redis:3.2
+    #    ports:
+    #      - 6379:6379
+        hostname: redis
+        # restart: always
+        networks:
+        - sender-back
+        logging:
+        driver: "json-file"
+        options:
+            max-size: "100M"
+            max-file: "3"
                 
     nginx:
         image: nginx:1.11.6
