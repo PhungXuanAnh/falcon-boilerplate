@@ -7,6 +7,7 @@ itsdangerous==0.24
 shortuuid==0.4.2
 cryptography==2.4.1
 cerberus==0.9
-slacker_log_handler
 psycopg2-binary==2.7.6.1
+honcho==1.0.1
 alembic
+slacker_log_handler

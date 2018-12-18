@@ -30,8 +30,6 @@ function db() {
     esac
 }
 
-source .venv/python3/bin/activate
-
 case "$1" in
     start)
         start

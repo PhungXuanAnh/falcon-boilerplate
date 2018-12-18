@@ -10,7 +10,7 @@ except ImportError:
 
 import logging
 from app.utils.database import new_alchemy_encoder
-from app.config import BRAND_NAME, POSTGRES
+from app.config import BRAND_NAME, POSTGRES_HOST
 from app.utils.database import engine
 from app.utils.errors import NotSupportedError
 
@@ -20,7 +20,7 @@ LOG = logging.getLogger('app')
 class BaseResource(object):
     HELLO_WORLD = {
         'server': '%s' % BRAND_NAME,
-        'database': '%s (%s)' % (engine.name, POSTGRES['host'])
+        'database': '%s (%s)' % (engine.name, POSTGRES_HOST)
     }
 
     def to_json(self, body_dict):
