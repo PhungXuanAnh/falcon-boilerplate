@@ -25,10 +25,46 @@ services:
                 max-size: "100M"
                 max-file: "3"
 
+    api-docs:
+        image: swaggerapi/swagger-ui:v3.4.5
+        environment:
+            - SWAGGER_JSON=/api-docs/swagger.json
+            - VALIDATOR_URL=null
+        networks:
+            - api-net
+        ports:
+            - 8080:8080
+        volumes:
+            - ./api-docs/:/api-docs/:ro
+        #restart: always
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"
+
+    postgres:
+        image: postgres:9.4
+        hostname: postgres
+        ports:
+            - 5432:5432
+        # restart: always
+        env_file: env/stag.env
+        volumes:
+            - ./postgres-data:/var/lib/postgresql/data
+        networks:
+            - api-net
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"
+                
     nginx:
         image: nginx:1.11.6
         depends_on:
             - user-api
+            - api-docs
         networks:
             - api-net
         ports:
@@ -44,22 +80,6 @@ services:
                 max-size: "100M"
                 max-file: "3"
 
-    postgres:
-      image: postgres:9.4
-      hostname: postgres
-      ports:
-        - 5432:5432
-      # restart: always
-      env_file: env/stag.env
-      volumes:
-        - ./postgres-data:/var/lib/postgresql/data
-      networks:
-        - api-net
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100M"
-          max-file: "3"
 
 # volumes:
 #     postgres-data:
