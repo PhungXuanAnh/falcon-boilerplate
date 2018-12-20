@@ -21,11 +21,11 @@ function db() {
             fi        
             alembic revision --autogenerate -m $3
             ;;
-        migrations)
+        make-migrations)
             alembic upgrade head
             ;;
         *)
-        echo "Usage: falcon.sh db {migrate|migrations}"
+        echo "Usage: falcon.sh db {migrate|make-migrations}"
         exit 1
     esac
 }
