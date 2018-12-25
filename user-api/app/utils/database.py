@@ -12,6 +12,7 @@ import logging
 from app import config
 
 LOG = logging.getLogger('app')
+ATTEMPS = 10
 
 
 def get_engine(uri):
@@ -26,7 +27,24 @@ def get_engine(uri):
             'autocommit': config.DB_AUTOCOMMIT
         }
     }
-    return create_engine(uri, **options)
+
+    engine = create_engine(uri, **options)
+
+    attempt = 1
+    while attempt <= ATTEMPS:
+        try:
+            connection = engine.connect()
+            connection.close()
+            break
+        except Exception as e:
+            LOG.error('Connect to database failed: {}, tried {} times'.format(e, attempt))
+            attempt += 1
+            if attempt == ATTEMPS + 1:
+                connection = engine.connect()
+                connection.close()
+            time.sleep(1)
+
+    return engine
 
 
 db_session = scoped_session(sessionmaker())
