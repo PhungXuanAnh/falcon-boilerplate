@@ -26,7 +26,7 @@ services:
                 max-file: "3"
 
     api-docs:
-        image: swaggerapi/swagger-ui:v3.4.5
+        image: swaggerapi/swagger-ui
         environment:
             - SWAGGER_JSON=/api-docs/swagger.json
             - VALIDATOR_URL=null
@@ -42,6 +42,18 @@ services:
             options:
                 max-size: "100M"
                 max-file: "3"
+
+    api-docs-editor:
+        image: swaggerapi/swagger-editor
+        networks:
+            - api-net
+        ports:
+            - 8081:8080
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "100M"
+                max-file: "3"                
 
     rabbitmq:
         image: rabbitmq:3.7.7-management
