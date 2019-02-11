@@ -31,7 +31,8 @@ class Item1(object):
 class Item2(object):
     def on_get(self, req, resp):
         user = req.context['user']
-        resp.body = 'User: {} and Password: {}'.format(user['username'], user['password'])
+        resp.body = "This api uses Basic authentication, return user: {}".format(user) +\
+                    "\nCheck servers logs for detail how to get Auth information"
 
 
 class Item3(object):
@@ -42,7 +43,8 @@ class Item3(object):
 
     def on_get(self, req, resp):
         user = req.context['user']
-        resp.body = "This api use token authentication, return user: {}".format(user)
+        resp.body = "This api use Token authentication, return user: {}".format(user) +\
+                    "\nCheck servers logs for detail how to get Auth information"
 
     def on_post(self, req, resp):
         resp.body = "This api doesn't use token authentication"
@@ -55,7 +57,8 @@ class Item4(object):
 
     def on_get(self, req, resp):
         user = req.context['user']
-        resp.body = "This api use jwt token authentication, return user: {}".format(user)
+        resp.body = "This api use jwt token authentication, return user: {}".format(user) +\
+                    "\nCheck servers logs for detail how to get Auth information"
 
 
 class Item5(object):
