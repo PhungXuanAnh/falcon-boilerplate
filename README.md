@@ -1,4 +1,13 @@
 
+# Run server
+
+```shell
+pip install -r requirements.txt
+source env...
+./falcon.sh start
+```
+
+
 # Item 1 doesn't use authentication
 
 ```shell
