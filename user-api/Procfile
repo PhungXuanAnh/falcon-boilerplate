@@ -1,3 +1,0 @@
-api: gunicorn app.main:application --worker-connections 3 -b :5000
-worker: cd app && celery worker -A worker --loglevel=info -f logs/celery.log --concurrency=25 --without-heartbeat
-# celery_monitor: cd app && celery flower -A worker --address=0.0.0.0 --port=5555
