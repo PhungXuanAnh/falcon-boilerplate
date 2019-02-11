@@ -1,0 +1,5 @@
+falcon
+sqlalchemy
+falcon-auth
+gunicorn
+httpie
