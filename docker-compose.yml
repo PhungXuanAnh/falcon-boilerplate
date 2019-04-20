@@ -78,7 +78,7 @@ services:
         # restart: always
         env_file: env/stag.env
         volumes:
-            - ./postgres-data:/var/lib/postgresql/data
+            - falcon-boilerlate-postgres-data:/var/lib/postgresql/data
         networks:
             - api-net
         logging:
@@ -122,8 +122,8 @@ services:
                 max-file: "3"
 
 
-# volumes:
-#     postgres-data:
+volumes:
+    falcon-boilerlate-postgres-data:
 
 networks:
   api-net:
