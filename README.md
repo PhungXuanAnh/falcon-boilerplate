@@ -1,3 +1,14 @@
+This is sample api using falcon
+
+# Run app
+
+```shell
+source env/../
+pip install -r requirements.txt
+./falcon.sh
+Usage: falcon.sh {start|stop|db}
+```
+
 # Run command without auth
 
 ```shell
